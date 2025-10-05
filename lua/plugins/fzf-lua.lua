@@ -1,40 +1,40 @@
 return {
-    'ibhagwan/fzf-lua',
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-        "hide",
-        grep = {
-            true,
-            rg_glob = true,
-            glob_flag = "--iglob",
-            glob_separator = "%s%-%-",
-            no_ignore = false,
-        },
-        winopts = {
-            true,
-            preview = {
-                layout = 'vertical',
-            },
-        },
-        oldfiles = {
-            true,
-            include_current_session = true,
-            no_ignore = false,
-        },
-        files = {
-            true,
-            no_ignore = false,
-        },
-        keymap = {
-            true,
-            fzf = {
-                true,
-                ["ctrl-j"] = "half-page-down",
-                ["ctrl-k"] = "half-page-up",
-                ["ctrl-a"] = "beginning-of-line",
-                ["ctrl-e"] = "end-of-line",
-                ["alt-a"] = "toggle-all",
-            },
-        },
-    }
+	"ibhagwan/fzf-lua",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	opts = {
+		"hide",
+		grep = {
+			true,
+			rg_glob = true,
+			glob_flag = "--iglob",
+			glob_separator = "%s%-%-",
+			no_ignore = false,
+		},
+		winopts = {
+			true,
+			preview = {
+				layout = "vertical",
+			},
+		},
+		oldfiles = {
+			true,
+			include_current_session = true,
+			no_ignore = false,
+		},
+		files = {
+			true,
+			no_ignore = false,
+		},
+		keymap = {
+			true,
+			fzf = {
+				true,
+				["ctrl-j"] = "half-page-down",
+				["ctrl-k"] = "half-page-up",
+				["ctrl-a"] = "beginning-of-line",
+				["ctrl-e"] = "end-of-line",
+				["alt-a"] = "toggle-all",
+			},
+		},
+	},
 }

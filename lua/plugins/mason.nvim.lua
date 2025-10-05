@@ -1,4 +1,4 @@
 return {
-    "williamboman/mason.nvim",
-    opts = { PATH = "append" }
+	"williamboman/mason.nvim",
+	opts = { PATH = "append" },
 }

@@ -1,3 +1,3 @@
 return {
-    "samjwill/nvim-unception",
+	"samjwill/nvim-unception",
 }
