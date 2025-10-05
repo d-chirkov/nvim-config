@@ -8,7 +8,7 @@ return {
             rg_glob = true,
             glob_flag = "--iglob",
             glob_separator = "%s%-%-",
-            no_ignore = true,
+            no_ignore = false,
         },
         winopts = {
             true,
@@ -19,11 +19,11 @@ return {
         oldfiles = {
             true,
             include_current_session = true,
-            no_ignore = true,
+            no_ignore = false,
         },
         files = {
             true,
-            no_ignore = true,
+            no_ignore = false,
         },
         keymap = {
             true,

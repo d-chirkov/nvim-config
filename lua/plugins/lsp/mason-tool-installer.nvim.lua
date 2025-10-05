@@ -6,7 +6,9 @@ return {
         ensure_installed = { 
             "gopls",
             "kotlin-lsp",
-            "jdtls" 
+            "jdtls",
+            "json-lsp",
+            "marksman",
         },
         run_on_start = true 
     },

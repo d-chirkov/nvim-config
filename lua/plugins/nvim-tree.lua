@@ -26,6 +26,7 @@ return {
                 -- vim.keymap.set('n', '<C-k>', api.node.show_info_popup,              opts('Info'))
                 vim.keymap.set('n', '<C-r>', api.fs.rename_sub, opts('Rename: Omit Filename'))
                 vim.keymap.set('n', '<C-t>', api.node.open.tab, opts('Open: New Tab'))
+                vim.keymap.set('n', '<leader>n', api.node.open.tab, opts('Open: New Tab'))
                 vim.keymap.set('n', '<C-v>', api.node.open.vertical, opts('Open: Vertical Split'))
                 vim.keymap.set('n', '<C-x>', api.node.open.horizontal, opts('Open: Horizontal Split'))
                 vim.keymap.set('n', '<BS>', api.node.navigate.parent_close, opts('Close Directory'))
@@ -80,7 +81,7 @@ return {
                 vim.keymap.set('n', 'ge', api.node.open.toggle_group_empty, opts('Toggle group empty'))
             end
             local HEIGHT_RATIO = 0.8
-            local WIDTH_RATIO = 0.5
+            local WIDTH_RATIO = 0.8
             require("nvim-tree").setup {
                 sort_by = "case_sensitive",
                 sync_root_with_cwd = true,
@@ -121,11 +122,15 @@ return {
                 },
                 renderer = {
                     group_empty = true,
+                    icons = {
+                        git_placement = "after",
+                        bookmarks_placement = "after",
+                    },
                 },
                 update_focused_file = {
                     enable = true,
                     update_cwd = false,
-                }
+                },
             }
         end,
     }

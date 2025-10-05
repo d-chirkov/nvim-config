@@ -19,6 +19,11 @@ return {
 
         -- kotlin added via plugin
         -- jdtls is configured via plugin
-        vim.lsp.enable({ "gopls", "jdtls" })
+        vim.lsp.enable({ 
+            "gopls",
+            "jdtls",
+            "jsonls",
+            "marksman",
+        })
     end,
 }
