@@ -25,3 +25,5 @@ require("lazy").setup({
 	},
 	checker = { enabled = true, notify = false },
 })
+
+require("fzf-lua").register_ui_select()

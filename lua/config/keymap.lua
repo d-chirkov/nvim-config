@@ -35,27 +35,51 @@ end, { desc = "Previous diagnostic with float" })
 
 --fzf
 vim.keymap.set("n", "<leader>h", ":FzfLua oldfiles<cr>", { silent = true, noremap = true })
-vim.keymap.set("v", "<leader>j", "<ESC>:FzfLua grep_visual<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>j", ":FzfLua grep_cword<cr>", { noremap = true, silent = true })
+-- vim.keymap.set("v", "<leader>j", "<ESC>:FzfLua grep_visual<cr>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<leader>j", ":FzfLua grep_cword<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>k", ":FzfLua files<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>l", ":FzfLua lines<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>;", ":FzfLua live_grep<cr>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<leader>;", ":FzfLua live_grep<cr><c-g>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>'", ":FzfLua lsp_document_symbols<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", '<leader>"', ":FzfLua lsp_workspace_symbols<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>r", ":FzfLua resume<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>g", ":FzfLua git_hunks<cr>", { silent = true, noremap = true })
 
+vim.keymap.set("n", "<leader>j", ":FzfLua live_grep<cr><c-g>", { noremap = true, silent = true })
+vim.keymap.set("v", "<leader>j", "<ESC>:FzfLua grep_visual<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>J", ":FzfLua grep_cword<cr>", { noremap = true, silent = true })
+
 --markview
 vim.keymap.set("n", "<leader>m", ":Markview Toggle<cr>", { silent = true, noremap = true })
 
 --terminal
-vim.keymap.set(
-	"n",
-	"<leader>t",
-	[[:let @" = expand("%:p:h")<cr>:tabnew<cr>:terminal<cr>acd <c-\><c-n>pa<cr>clear<cr>]],
-	{ silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>T", [[:tabnew<cr>:terminal<cr>a]], { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>T", function()
+  local dir
+
+  if vim.bo.buftype == "terminal" then
+    local name = vim.api.nvim_buf_get_name(0)
+    dir = name:match(";cwd=(.-)//%d+:")
+       or name:match("term://[^/]+//%d+:(.+)")
+  else
+    dir = vim.fn.expand("%:p:h")
+  end
+
+  if not dir or dir == "" or vim.fn.isdirectory(dir) == 0 then
+    dir = vim.fn.getcwd()
+  end
+
+  vim.cmd("tabnew")
+  vim.cmd("tcd " .. vim.fn.fnameescape(dir))
+  vim.cmd("terminal")
+  vim.cmd("startinsert")
+end, { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>t", function()
+  local root = vim.fn.getcwd(-1, -1)
+  vim.cmd("tabnew")
+  vim.cmd("tcd " .. vim.fn.fnameescape(root))
+  vim.cmd("terminal")
+  vim.cmd("startinsert")
+end, { silent = true, noremap = true })
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true, noremap = true })
 
 --tabs
@@ -67,6 +91,19 @@ vim.keymap.set("n", "<leader>_", ":$tabmove<cr>", { silent = true, noremap = tru
 vim.keymap.set("n", "<leader>*", ":0tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>w", "<ESC>:tabc<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>n", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
+
+vim.keymap.set("n", "<c-9>", ":tabp<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-0>", ":tabn<cr>", { silent = true, noremap = true })
+vim.keymap.set("i", "<c-9>", "<esc>:tabp<cr>", { silent = true, noremap = true })
+vim.keymap.set("i", "<c-0>", "<esc>:tabn<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-(>", ":-tabmove<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-)>", ":+tabmove<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-_>", ":$tabmove<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-*>", ":0tabmove<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-->", "<ESC>:tabc<cr>", { silent = true, noremap = true })
+vim.keymap.set("i", "<c-->", "<ESC>:tabc<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-n>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
+vim.keymap.set("i", "<c-n>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
 
 --misc
 vim.keymap.set("n", "<leader>a", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
