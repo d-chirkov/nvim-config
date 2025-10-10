@@ -5,6 +5,11 @@ vim.o.shiftwidth = 4
 vim.o.winborder = "rounded"
 vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 
 vim.cmd([[
 set clipboard=unnamedplus
@@ -47,3 +52,5 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.opt_local.scrolloff = 0
   end,
 })
+
+vim.diagnostic.config({ jump = { float = true }})

@@ -1,7 +1,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-	lazy = false,
+	cmd = "NvimTreeToggle",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -29,7 +29,7 @@ return {
 			vim.keymap.set("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
 			-- vim.keymap.set('n', '<C-k>', api.node.show_info_popup,              opts('Info'))
 			vim.keymap.set("n", "<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
-			vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
+			vim.keymap.set("n", "<C-n>", api.node.open.tab, opts("Open: New Tab"))
 			vim.keymap.set("n", "<leader>n", api.node.open.tab, opts("Open: New Tab"))
 			vim.keymap.set("n", "<C-v>", api.node.open.vertical, opts("Open: Vertical Split"))
 			vim.keymap.set("n", "<C-x>", api.node.open.horizontal, opts("Open: Horizontal Split"))
