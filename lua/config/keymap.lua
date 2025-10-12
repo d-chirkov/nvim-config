@@ -30,7 +30,7 @@ vim.keymap.set("n", "<c-0>", ":+tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-8>", ":0tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-->", ":$tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-c>", "<ESC>:q<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<c-v>", "<ESC>:q!<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-x>", "<ESC>:q!<cr>", { silent = true, noremap = true })
 
 --moves
 vim.keymap.set("n", "<c-j>", "10j", { silent = true, noremap = true })
@@ -162,6 +162,7 @@ vim.keymap.set("n", "<leader>/", function()
 end, { silent = true, noremap = true })
 
 -- exteneded layer
+vim.keymap.set("n", "<leader>eq", ":FzfLua quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>er", ":Gitsigns reset_hunk<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>eu", function()
   require("config.func").open_in_git_web(vim.fn.line("."))
