@@ -5,10 +5,9 @@ return {
 	version = "1.*",
 	opts = {
 		keymap = {
-			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-			["<Esc>"] = { "hide", "fallback" },
-
-			["<Tab>"] = {
+            ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+            ['<C-e>'] = { 'hide', 'fallback' },
+			["<CR>"] = {
 				function(cmp)
 					if cmp.snippet_active() then
 						return cmp.accept()
@@ -42,6 +41,12 @@ return {
 			menu = {
 				auto_show = false,
 			},
+            accept = {
+                auto_brackets = {
+                    enabled = true,
+                    blocked_filetypes = { 'kotlin' },
+                },
+            },
 			--ghost_text = { enabled = true },
 		},
 		signature = {

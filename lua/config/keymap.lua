@@ -4,20 +4,33 @@ vim.g.maplocalleader = " "
 
 --misc
 vim.keymap.set("n", "<cr>", "<cr>", {})
+local function close_floating()
+  local inactive_floating_wins = vim.fn.filter(vim.api.nvim_list_wins(), function(k, v)
+    local file_type = vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(v), "filetype")
+
+    return vim.api.nvim_win_get_config(v).relative ~= ""
+      and v ~= vim.api.nvim_get_current_win()
+      and file_type ~= "hydra_hint"
+  end)
+  for _, w in ipairs(inactive_floating_wins) do
+    pcall(vim.api.nvim_win_close, w, false)
+  end
+end
+vim.keymap.set("n", "<esc>", close_floating)
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true, noremap = true })
+vim.keymap.set('i', '<Esc>', ' <BS><Esc>', { noremap = true, silent = true, expr = true, buffer = true })
 
 --tabs
-vim.keymap.set("n", "<c-m>", ":tabp<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<c-,>", ":tabn<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-;>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-t>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-,>", ":tabp<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<c-.>", ":tabn<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-9>", ":-tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-0>", ":+tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-8>", ":0tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-->", ":$tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-c>", "<ESC>:q<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<c-v>", "<ESC>:q!<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<c-n>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
-vim.keymap.set("i", "<c-n>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
-
 
 --moves
 vim.keymap.set("n", "<c-j>", "10j", { silent = true, noremap = true })
@@ -117,9 +130,10 @@ vim.keymap.set("v", "<leader>l", function()
 end, { desc = "Workspace symbols for selected text" })
 
 vim.keymap.set("n", "<leader>;", ":FzfLua resume<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>'", require("aerial").fzf_lua_picker, { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>c", ":FzfLua lsp_code_actions<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>n", ":FzfLua grep_curbuf<cr><c-g>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>m", ":FzfLua lsp_document_symbols", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>n", ":FzfLua grep_curbuf<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>m", ":FzfLua lsp_document_symbols<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>.", function()
 	local dir
 
@@ -149,14 +163,27 @@ end, { silent = true, noremap = true })
 
 -- exteneded layer
 vim.keymap.set("n", "<leader>er", ":Gitsigns reset_hunk<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>eu", function()
+  require("config.func").open_in_git_web(vim.fn.line("."))
+end, { desc = "Open current file+line in Git web UI" })
+vim.keymap.set("v", "<leader>eu", function()
+  local s = vim.fn.getpos("'<")[2]
+  local e = vim.fn.getpos("'>")[2]
+  if s > e then s, e = e, s end
+  require("config.func").open_in_git_web(s, e)
+  vim.schedule(function() vim.cmd("normal! gv") end)
+end, { desc = "Open selected range in Git web UI" })
+vim.keymap.set("n", "<leader>ei", ":Import", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>ep", ":Gitsigns preview_hunk<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>ed", ":FzfLua diagnostics_document<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>ef", ":FzfLua<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>eg", ":FzfLua<cr>git_<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>eh", function()
+vim.keymap.set("n", "<leader>eg", ":FzfLua<cr>^git_", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>eh", ":FzfLua git_bcommits<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>el", ":FzfLua<cr>^lsp_", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>eb", ":Gitsigns blame<cr>", { silent = true, noremap = true })
+
+-- toggles
+vim.keymap.set("n", "<leader>eth", function()
 	local b = vim.api.nvim_get_current_buf()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = b }), { bufnr = b })
 end, { desc = "Toggle Inlay Hints" })
-vim.keymap.set("n", "<leader>el", ":FzfLua<cr>lsp_", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>eb", ":Gitsigns blame_line<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>eB", ":gitsigns blame<cr>", { silent = true, noremap = true })

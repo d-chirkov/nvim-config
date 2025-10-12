@@ -13,6 +13,8 @@ return {
 		},
 		winopts = {
 			true,
+			height = 0.90,
+			width = 0.95,
 			preview = {
 				layout = "vertical",
 			},
@@ -35,44 +37,6 @@ return {
 				["ctrl-h"] = "beginning-of-line",
 				["ctrl-l"] = "end-of-line",
 				["alt-a"] = "toggle-all",
-			},
-		},
-		actions = {
-			files = {
-				["default"] = function(...)
-					return require("fzf-lua.actions").file_edit(...)
-				end,
-				["ctrl-n"] = function(...)
-					return require("fzf-lua.actions").file_tabedit(...)
-				end,
-				["ctrl-t"] = false,
-			},
-			buffers = {
-				["default"] = function(...)
-					return require("fzf-lua.actions").buf_edit(...)
-				end,
-				["ctrl-n"] = function(...)
-					return require("fzf-lua.actions").buf_tabedit(...)
-				end,
-				["ctrl-t"] = false,
-			},
-			grep = {
-				["default"] = function(...)
-					return require("fzf-lua.actions").grep_edit(...)
-				end,
-				["ctrl-n"] = function(...)
-					return require("fzf-lua.actions").grep_tabedit(...)
-				end,
-				["ctrl-t"] = false,
-			},
-			oldfiles = {
-				["default"] = function(...)
-					return require("fzf-lua.actions").file_edit(...)
-				end,
-				["ctrl-n"] = function(...)
-					return require("fzf-lua.actions").file_tabedit(...)
-				end,
-				["ctrl-t"] = false,
 			},
 		},
 	},

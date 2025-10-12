@@ -27,9 +27,9 @@ return {
 			-- BEGIN_DEFAULT_ON_ATTACH
 			vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
 			vim.keymap.set("n", "<C-e>", api.node.open.replace_tree_buffer, opts("Open: In Place"))
-			-- vim.keymap.set('n', '<C-k>', api.node.show_info_popup,              opts('Info'))
+			--vim.keymap.set('n', '<C-k>', api.node.show_info_popup,              opts('Info'))
 			vim.keymap.set("n", "<C-r>", api.fs.rename_sub, opts("Rename: Omit Filename"))
-			vim.keymap.set("n", "<C-n>", api.node.open.tab, opts("Open: New Tab"))
+			vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
 			vim.keymap.set("n", "<leader>n", api.node.open.tab, opts("Open: New Tab"))
 			vim.keymap.set("n", "<C-v>", api.node.open.vertical, opts("Open: Vertical Split"))
 			vim.keymap.set("n", "<C-x>", api.node.open.horizontal, opts("Open: Horizontal Split"))
@@ -84,8 +84,8 @@ return {
 			vim.keymap.set("n", "<Esc>", api.tree.close, opts("Close"))
 			vim.keymap.set("n", "ge", api.node.open.toggle_group_empty, opts("Toggle group empty"))
 		end
-		local HEIGHT_RATIO = 0.8
-		local WIDTH_RATIO = 0.8
+		local HEIGHT_RATIO = 0.9
+		local WIDTH_RATIO = 0.7
 		require("nvim-tree").setup({
 			sort_by = "case_sensitive",
 			sync_root_with_cwd = true,
