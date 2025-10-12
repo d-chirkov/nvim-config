@@ -16,7 +16,7 @@ set termguicolors
 nnoremap q: <nop>
 set nocompatible            " disable compatibility to old-time vi
 " set showmatch             " show matching
-set ignorecase              " case insensitive
+set ignorecase smartcase    
 "set hlsearch               " highlight search
 set nohlsearch
 set incsearch               " incremental search
