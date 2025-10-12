@@ -5,20 +5,19 @@ vim.g.maplocalleader = " "
 --misc
 vim.keymap.set("n", "<cr>", "<cr>", {})
 local function close_floating()
-  local inactive_floating_wins = vim.fn.filter(vim.api.nvim_list_wins(), function(k, v)
-    local file_type = vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(v), "filetype")
+	local inactive_floating_wins = vim.fn.filter(vim.api.nvim_list_wins(), function(k, v)
+		local file_type = vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(v), "filetype")
 
-    return vim.api.nvim_win_get_config(v).relative ~= ""
-      and v ~= vim.api.nvim_get_current_win()
-      and file_type ~= "hydra_hint"
-  end)
-  for _, w in ipairs(inactive_floating_wins) do
-    pcall(vim.api.nvim_win_close, w, false)
-  end
+		return vim.api.nvim_win_get_config(v).relative ~= ""
+			and v ~= vim.api.nvim_get_current_win()
+			and file_type ~= "hydra_hint"
+	end)
+	for _, w in ipairs(inactive_floating_wins) do
+		pcall(vim.api.nvim_win_close, w, false)
+	end
 end
 vim.keymap.set("n", "<esc>", close_floating)
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true, noremap = true })
-vim.keymap.set('i', '<Esc>', ' <BS><Esc>', { noremap = true, silent = true, expr = true, buffer = true })
 
 --tabs
 vim.keymap.set("n", "<c-;>", "<ESC>:tabnew<cr>", { silent = true, noremap = true })
@@ -56,7 +55,6 @@ vim.keymap.set("n", "[e", function()
 	vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "Prev error" })
 
-
 -- basic layer
 vim.keymap.set("n", "<leader>*", ":0tabmove<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>(", ":-tabmove<cr>", { silent = true, noremap = true })
@@ -86,7 +84,15 @@ vim.keymap.set("n", "<leader>f", function()
 	end)
 end, { desc = "Format code" })
 vim.keymap.set("n", "<leader>g", ":LazyGit<cr>", { silent = true, noremap = true })
-vim.keymap.set("n", "<leader>h", ":FzfLua oldfiles<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>h", function()
+	require("fzf-lua").oldfiles({
+		cwd = vim.loop.cwd(),
+		include_current_session = true,
+		filter = function(path)
+			return path:find(vim.loop.cwd(), 1, true)
+		end,
+	})
+end, { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>j", ":FzfLua live_grep<cr><c-g>", { noremap = true, silent = true })
 vim.keymap.set("v", "<leader>j", ":FzfLua grep_visual<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>J", ":FzfLua grep_cword<cr>", { noremap = true, silent = true })
@@ -165,14 +171,18 @@ end, { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>eq", ":FzfLua quickfix<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>er", ":Gitsigns reset_hunk<cr>", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>eu", function()
-  require("config.func").open_in_git_web(vim.fn.line("."))
+	require("config.func").open_in_git_web(vim.fn.line("."))
 end, { desc = "Open current file+line in Git web UI" })
 vim.keymap.set("v", "<leader>eu", function()
-  local s = vim.fn.getpos("'<")[2]
-  local e = vim.fn.getpos("'>")[2]
-  if s > e then s, e = e, s end
-  require("config.func").open_in_git_web(s, e)
-  vim.schedule(function() vim.cmd("normal! gv") end)
+	local s = vim.fn.getpos("'<")[2]
+	local e = vim.fn.getpos("'>")[2]
+	if s > e then
+		s, e = e, s
+	end
+	require("config.func").open_in_git_web(s, e)
+	vim.schedule(function()
+		vim.cmd("normal! gv")
+	end)
 end, { desc = "Open selected range in Git web UI" })
 vim.keymap.set("n", "<leader>ei", ":Import", { silent = true, noremap = true })
 vim.keymap.set("n", "<leader>ep", ":Gitsigns preview_hunk<cr>", { silent = true, noremap = true })
