@@ -3,6 +3,6 @@ return {
 	event = "TermOpen",
 	version = "1.*",
 	opts = {
-		prompt_end = ":",
+		prompt_end = ">",
 	},
 }

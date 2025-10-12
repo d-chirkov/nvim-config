@@ -10,7 +10,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 vim.cmd([[
 set clipboard=unnamedplus
 set termguicolors
@@ -48,22 +47,30 @@ set t_Co=256
 ]])
 
 vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function()
-    vim.opt_local.scrolloff = 0
-  end,
+	callback = function()
+		vim.opt_local.scrolloff = 0
+	end,
 })
 
-vim.diagnostic.config({ jump = { float = true }})
+vim.diagnostic.config({ jump = { float = true } })
 
+-- removes jdtls notifications which appears on each file opening
 local orig_progress = vim.lsp.handlers["$/progress"]
 vim.lsp.handlers["$/progress"] = function(err, result, ctx, config)
-  local client = ctx and vim.lsp.get_client_by_id(ctx.client_id)
-  if client and client.name == "jdtls" then
-    local val = result and result.value
-    if val and type(val.message) == "string" and
-       (val.message:match("Validate documents") or val.message:match("Publish Diagnostics")) then
-      return
-    end
-  end
-  return orig_progress(err, result, ctx, config)
+	local client = ctx and vim.lsp.get_client_by_id(ctx.client_id)
+	if client and client.name == "jdtls" then
+		local val = result and result.value
+		if
+			val
+			and type(val.message) == "string"
+			and (val.message:match("Validate documents") or val.message:match("Publish Diagnostics"))
+		then
+			return
+		end
+	end
+	return orig_progress(err, result, ctx, config)
 end
+
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 50
+
