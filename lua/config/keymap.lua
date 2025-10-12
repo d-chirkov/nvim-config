@@ -150,7 +150,7 @@ end, { noremap = true, silent = true, desc = "fzf: file under cursor" })
 vim.keymap.set(
 	"n",
 	"<leader>l",
-	":FzfLua lsp_workspace_symbols",
+	":FzfLua lsp_workspace_symbols<cr>",
 	{ noremap = true, silent = true, desc = "fzf: lsp workspace symbols" }
 )
 
@@ -265,6 +265,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>ek", ":FzfLua keymaps<cr>", { silent = true, noremap = true, desc = "fzf: keymaps" })
 vim.keymap.set("n", "<leader>el", ":FzfLua<cr>^lsp_", { silent = true, noremap = true, desc = "fzf: lsp" })
 vim.keymap.set("n", "<leader>eb", ":Gitsigns blame<cr>", { silent = true, noremap = true, desc = "git: blame" })
+vim.keymap.set("n", "<leader>em", ":Markview<cr>", { silent = true, noremap = true, desc = "git: blame" })
 
 -- toggles
 vim.keymap.set("n", "<leader>eth", function()
