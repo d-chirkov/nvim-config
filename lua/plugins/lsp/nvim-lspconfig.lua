@@ -14,7 +14,7 @@ return {
 			settings = {
 				java = {},
 			},
-            root_dir = vim.fs.root(0, {'gradlew', '.git', 'mvnw'}),
+			root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
 		})
 
 		-- kotlin added via plugin

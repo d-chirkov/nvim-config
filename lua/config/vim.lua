@@ -54,3 +54,16 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 vim.diagnostic.config({ jump = { float = true }})
+
+local orig_progress = vim.lsp.handlers["$/progress"]
+vim.lsp.handlers["$/progress"] = function(err, result, ctx, config)
+  local client = ctx and vim.lsp.get_client_by_id(ctx.client_id)
+  if client and client.name == "jdtls" then
+    local val = result and result.value
+    if val and type(val.message) == "string" and
+       (val.message:match("Validate documents") or val.message:match("Publish Diagnostics")) then
+      return
+    end
+  end
+  return orig_progress(err, result, ctx, config)
+end

@@ -8,7 +8,6 @@ return {
 			async = false,
 			timeout_ms = 10000,
 		},
-		-- log_level = vim.log.levels.DEBUG,
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "isort", "black" },
