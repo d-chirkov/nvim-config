@@ -1,7 +1,7 @@
 -- ensures that language servers are installed by mason
 return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+	event = "VeryLazy",
 	dependencies = { "williamboman/mason.nvim" },
 	opts = {
 		ensure_installed = {

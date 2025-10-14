@@ -1,5 +1,5 @@
 return {
 	"williamboman/mason.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
 	opts = { PATH = "append" },
 }

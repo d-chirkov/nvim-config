@@ -1,6 +1,7 @@
 -- configures language servers
 return {
 	"neovim/nvim-lspconfig",
+	event = "VeryLazy",
 	config = function()
 		vim.lsp.config("gopls", {
 			settings = { gopls = { staticcheck = true } },

@@ -1,7 +1,7 @@
 return {
 	"saghen/blink.cmp",
 	dependencies = { "rafamadriz/friendly-snippets" },
-    event = { "BufReadPost", "BufNewFile" },
+    event = "VeryLazy",
 	version = "1.*",
 	opts = {
 		keymap = {

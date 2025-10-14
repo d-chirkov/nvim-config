@@ -24,7 +24,10 @@ vim.api.nvim_create_autocmd("TermEnter", {
 })
 return {
     "kdheepak/lazygit.nvim",
-    lazy = true,
+    event = "VeryLazy",
+	cond = function()
+		return vim.fs.find(".git", { upward = true })[1] ~= nil
+	end,
     cmd = {
         "LazyGit",
         "LazyGitConfig",

@@ -1,6 +1,6 @@
 return {
 	"piersolenski/import.nvim",
-	cmd = "Import",
+    event = "VeryLazy",
 	dependencies = {
 		"ibhagwan/fzf-lua",
 	},

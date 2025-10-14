@@ -1,6 +1,6 @@
 return {
 	"OXY2DEV/markview.nvim",
-    ft = { "markdown" },
+    event = "VeryLazy",
 	dependencies = {
 		"saghen/blink.cmp",
 	},
