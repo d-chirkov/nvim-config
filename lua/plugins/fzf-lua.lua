@@ -3,13 +3,14 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	cmd = "FzfLua",
 	opts = {
-		"hide",
+        { "hide" },
 		grep = {
 			true,
 			rg_glob = true,
 			glob_flag = "--iglob",
 			glob_separator = "%s%-%-",
 			no_ignore = false,
+            hidden = true,
 		},
 		winopts = {
 			true,
