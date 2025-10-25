@@ -136,5 +136,6 @@ return {
 				update_cwd = false,
 			},
 		})
+		require("lsp-file-operations").setup()
 	end,
 }

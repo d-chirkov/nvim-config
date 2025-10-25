@@ -237,7 +237,7 @@ vim.keymap.set(
 	{ silent = true, noremap = true, desc = "git: reset hunk" }
 )
 vim.keymap.set("n", "<leader>eu", function()
-	require("config.func").open_in_git_web(vim.fn.line("."))
+	require("custom.git_url").open_in_git_web(vim.fn.line("."))
 end, { desc = "git: open url" })
 vim.keymap.set("v", "<leader>eu", function()
 	local s = vim.fn.getpos("'<")[2]
@@ -245,7 +245,7 @@ vim.keymap.set("v", "<leader>eu", function()
 	if s > e then
 		s, e = e, s
 	end
-	require("config.func").open_in_git_web(s, e)
+	require("custom.git_url").open_in_git_web(s, e)
 	vim.schedule(function()
 		vim.cmd("normal! gv")
 	end)
