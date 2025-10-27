@@ -4,6 +4,7 @@ local history_size = "1000"
 
 return {
 	"ibhagwan/fzf-lua",
+    enabled = true,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
 	config = function()
@@ -38,16 +39,16 @@ return {
 				include_current_session = true,
 				no_ignore = false,
 				fzf_opts = {
-					["--history"] = grep_history,
-					--["--history"] = file_history,
+					--["--history"] = grep_history,
+					["--history"] = file_history,
 				},
 			},
 			files = {
 				true,
 				no_ignore = false,
 				fzf_opts = {
-					--["--history"] = file_history,
-					["--history"] = grep_history,
+					["--history"] = file_history,
+					--["--history"] = grep_history,
 				},
 			},
 			keymap = {
