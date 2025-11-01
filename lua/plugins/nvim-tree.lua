@@ -1,7 +1,7 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-    event = "VeryLazy",
+    --event = "VeryLazy",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -136,6 +136,6 @@ return {
 				update_cwd = false,
 			},
 		})
-		require("lsp-file-operations").setup()
+		--require("lsp-file-operations").setup()
 	end,
 }

@@ -14,7 +14,7 @@ return {
 			jre_path = "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home",
 			-- Optional: Specify additional JVM arguments
 			jvm_args = {
-				"-Xmx4g",
+				"-Xmx8g",
 			},
 		})
 	end,
