@@ -30,8 +30,10 @@ return {
 				fullscreen = true,
 				height = 0.90,
 				width = 0.95,
-				border = "none",
+				border = "border-top",
+				title_pos = "left",
 				preview = {
+					border = "none",
 					layout = "vertical",
 					vertical = "up:50%",
 				},
@@ -62,15 +64,15 @@ return {
 					["alt-a"] = "toggle-all",
 					["ctrl-p"] = "prev-history",
 					["ctrl-n"] = "next-history",
-                    -- filter toggles
-                    -- tests
-					["alt-t"] = "transform-query(echo {q} | awk '{if($0 ~ /(^| )!test( |$)/){gsub(/(^| )!test( |$)/,\" \"); gsub(/^ /,\"\"); gsub(/ $/,\"\")}else{$0=\"!test \"$0}; print}')",
-                    -- kotlin files
-					["alt-k"] = "transform-query(echo {q} | awk '{if($0 ~ /(^| )\\047.kt( |$)/){gsub(/(^| )\\047.kt( |$)/,\" \"); gsub(/^ /,\"\"); gsub(/ $/,\"\")}else{$0=\"\\047.kt \"$0}; print}')",
-                    -- scala files
-					["alt-s"] = "transform-query(echo {q} | awk '{if($0 ~ /(^| )\\047.scala( |$)/){gsub(/(^| )\\047.scala( |$)/,\" \"); gsub(/^ /,\"\"); gsub(/ $/,\"\")}else{$0=\"\\047.scala \"$0}; print}')",
-                    -- java files
-					["alt-j"] = "transform-query(echo {q} | awk '{if($0 ~ /(^| )\\047.java( |$)/){gsub(/(^| )\\047.java( |$)/,\" \"); gsub(/^ /,\"\"); gsub(/ $/,\"\")}else{$0=\"\\047.java \"$0}; print}')",
+					-- filter toggles
+					-- tests
+					["alt-t"] = 'transform-query(echo {q} | awk \'{if($0 ~ /(^| )!test( |$)/){gsub(/(^| )!test( |$)/," "); gsub(/^ /,""); gsub(/ $/,"")}else{$0="!test "$0}; print}\')',
+					-- kotlin files
+					["alt-k"] = 'transform-query(echo {q} | awk \'{if($0 ~ /(^| )\\047.kt( |$)/){gsub(/(^| )\\047.kt( |$)/," "); gsub(/^ /,""); gsub(/ $/,"")}else{$0="\\047.kt "$0}; print}\')',
+					-- scala files
+					["alt-s"] = 'transform-query(echo {q} | awk \'{if($0 ~ /(^| )\\047.scala( |$)/){gsub(/(^| )\\047.scala( |$)/," "); gsub(/^ /,""); gsub(/ $/,"")}else{$0="\\047.scala "$0}; print}\')',
+					-- java files
+					["alt-j"] = 'transform-query(echo {q} | awk \'{if($0 ~ /(^| )\\047.java( |$)/){gsub(/(^| )\\047.java( |$)/," "); gsub(/^ /,""); gsub(/ $/,"")}else{$0="\\047.java "$0}; print}\')',
 				},
 			},
 		})
