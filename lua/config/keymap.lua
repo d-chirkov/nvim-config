@@ -29,7 +29,7 @@ vim.keymap.set("n", "<c-9>", ":-tabmove<cr>", { silent = true, noremap = true, d
 vim.keymap.set("n", "<c-0>", ":+tabmove<cr>", { silent = true, noremap = true, desc = "tab: move right" })
 vim.keymap.set("n", "<c-->", ":$tabmove<cr>", { silent = true, noremap = true, desc = "tab: move to the end" })
 vim.keymap.set("n", "<c-c>", "<ESC>:q<cr>", { silent = true, noremap = true, desc = "document: close" })
-vim.keymap.set("n", "<c-x>", "<ESC>:q!<cr>", { silent = true, noremap = true, desc = "document: close without saving" })
+vim.keymap.set("n", "<c-q>", "<ESC>:q!<cr>", { silent = true, noremap = true, desc = "document: close without saving" })
 
 --moves
 vim.keymap.set("n", "<c-j>", "10j", { silent = true, noremap = true, desc = "goto: up 10 lines" })
