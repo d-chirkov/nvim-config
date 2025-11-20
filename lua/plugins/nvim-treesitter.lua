@@ -26,6 +26,8 @@ return {
 				"latex",
 				"typst",
 				"yaml",
+                "scala",
+                "json",
 			},
 			highlight = {
 				enable = true,

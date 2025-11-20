@@ -3,6 +3,7 @@ return {
 	enabled = true,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
+    priority = 1002,
 	config = function()
 		local fzf = require("fzf-lua")
 		local file_history = vim.fn.stdpath("data") .. "/fzf-lua-file-history.txt"

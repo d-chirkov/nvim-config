@@ -40,10 +40,17 @@ vim.keymap.set("n", "<c-h>", "^", { silent = true, noremap = true, desc = "goto:
 vim.keymap.set("i", "<c-h>", "<esc>^i", { silent = true, noremap = true, desc = "goto: left" })
 vim.keymap.set("n", "<c-l>", "$", { silent = true, noremap = true, desc = "goto: right" })
 vim.keymap.set("i", "<c-l>", "<esc>$a", { silent = true, noremap = true, desc = "goto: right" })
-vim.keymap.set({ "n", "v" }, "]f", "]gfzt", { silent = true, remap = true, desc = "goto: next function" })
-vim.keymap.set({ "n", "v" }, "[f", "[gfzt", { silent = true, remap = true, desc = "goto: prev function" })
-vim.keymap.set({ "n", "v" }, "]c", "]gczt", { silent = true, remap = true, desc = "goto: next class" })
-vim.keymap.set({ "n", "v" }, "[c", "[gczt", { silent = true, remap = true, desc = "goto: prev class" })
+vim.keymap.set({ "n", "v" }, "]f", "]gfzz", { silent = true, remap = true, desc = "goto: next function" })
+vim.keymap.set({ "n", "v" }, "[f", "[gfzz", { silent = true, remap = true, desc = "goto: prev function" })
+vim.keymap.set({ "n", "v" }, "]s", "]gczz", { silent = true, remap = true, desc = "goto: next class" })
+vim.keymap.set({ "n", "v" }, "[s", "[gczz", { silent = true, remap = true, desc = "goto: prev class" })
+-- vim.keymap.set({ "n", "v" }, "]f", "]gfzt", { silent = true, remap = true, desc = "goto: next function" })
+-- vim.keymap.set({ "n", "v" }, "[f", "[gfzt", { silent = true, remap = true, desc = "goto: prev function" })
+-- vim.keymap.set({ "n", "v" }, "]s", "]gczt", { silent = true, remap = true, desc = "goto: next class" })
+-- vim.keymap.set({ "n", "v" }, "[s", "[gczt", { silent = true, remap = true, desc = "goto: prev class" })
+vim.keymap.set({ "n", "v" }, "[c", function()
+	require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true, remap = true, desc = "goto: prev context" })
 vim.keymap.set({ "n", "v" }, "]e", function()
 	vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "diagnostics: next error" })
@@ -70,6 +77,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>+", "gg=G<c-o>", { silent = true, noremap = true, desc = "format simple" })
 vim.keymap.set("n", "<leader>q", "@q", { silent = true, noremap = true, desc = "run macro" })
 vim.keymap.set("n", "<leader>Q", ":qa<cr>", { silent = true, noremap = true, desc = "quit" })
+vim.keymap.set("n", "<leader>w", ":Markview<cr>", { silent = true, noremap = true, desc = "git: blame" })
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { silent = true, noremap = true, desc = "lsp rename" })
 vim.keymap.set(
 	"n",
@@ -95,6 +103,7 @@ vim.keymap.set(
 	vim.diagnostic.open_float,
 	{ silent = true, noremap = true, desc = "diagnostics: float" }
 )
+vim.keymap.set("n", "<leader>p", ":FzfLua jumps<cr>", { noremap = true, silent = true, desc = "fzf: jumps" })
 vim.keymap.set("n", "<leader>a", ":NvimTreeToggle<cr>", { silent = true, noremap = true, desc = "file tree" })
 vim.keymap.set("n", "<leader>s", ":w<cr>", { silent = true, noremap = true, desc = "save document" })
 vim.keymap.set("n", "<leader>S", ":wa<cr>", { silent = true, noremap = true, desc = "save all" })
@@ -189,6 +198,7 @@ vim.keymap.set(
 	":FzfLua lsp_code_actions<cr>",
 	{ silent = true, noremap = true, desc = "fzf: lsp code actions" }
 )
+vim.keymap.set("n", "<leader>b", ":FzfLua live_grep<cr>", { noremap = true, silent = true, desc = "fzf: grep" })
 vim.keymap.set(
 	"n",
 	"<leader>n",
@@ -199,6 +209,12 @@ vim.keymap.set(
 	"n",
 	"<leader>m",
 	":FzfLua lsp_document_symbols<cr>",
+	{ noremap = true, silent = true, desc = "fzf: lsp document symbols" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>,",
+	":FzfLua lsp_workspace_diagnostics<cr>",
 	{ noremap = true, silent = true, desc = "fzf: lsp document symbols" }
 )
 vim.keymap.set("n", "<leader>.", function()

@@ -11,6 +11,7 @@ return {
 			"jdtls",
 			"json-lsp",
 			"marksman",
+            "docker-language-server",
 			-- formatters
 			"black",
 			"stylua",

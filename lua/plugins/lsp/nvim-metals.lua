@@ -6,6 +6,7 @@ return {
 		metals_config.on_attach = function(client, bufnr)
 			-- your on_attach function
 		end
+		metals_config.root_patterns = { ".git" }
 
 		return metals_config
 	end,

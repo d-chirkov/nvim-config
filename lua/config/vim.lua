@@ -11,7 +11,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.cmd([[
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set termguicolors
 nnoremap q: <nop>
 set nocompatible            " disable compatibility to old-time vi
@@ -39,6 +39,7 @@ set noswapfile              " disable creating swap file
 " set clipboard=
 set fillchars=eob:\ ,fold:\ ,vert:\│ " remove unnecessary tildas at empty lines
 let &scrolloff = 5
+set smoothscroll
 set showtabline=0
 set relativenumber
 au TextYankPost * silent! lua vim.highlight.on_yank()
@@ -73,4 +74,5 @@ end
 
 vim.o.ttimeout = true
 vim.o.ttimeoutlen = 50
-
+vim.opt.updatetime = 50
+vim.o.autowriteall = true

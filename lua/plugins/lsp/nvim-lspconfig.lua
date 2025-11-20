@@ -18,13 +18,17 @@ return {
 			root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
 		})
 
+		vim.lsp.config("docker_language_server", {})
+
 		-- kotlin added via plugin
-		-- jdtls is configured via plugin
+		-- java (jdtls) is configured via plugin
+		-- scala (metals) is configured via plugin
 		vim.lsp.enable({
 			"gopls",
 			"jdtls",
 			"jsonls",
 			"marksman",
+			"docker_language_server",
 		})
 	end,
 }
