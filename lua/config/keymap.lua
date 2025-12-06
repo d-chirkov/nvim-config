@@ -286,10 +286,9 @@ vim.keymap.set(
 	":FzfLua git_bcommits<cr>",
 	{ silent = true, noremap = true, desc = "git: history: document" }
 )
-vim.keymap.set("n", "<leader>ek", ":FzfLua keymaps<cr>", { silent = true, noremap = true, desc = "fzf: keymaps" })
+vim.keymap.set("n", "<leader>ew", ":FzfLua buffers<cr>", { silent = true, noremap = true, desc = "fzf: keymaps" })
 vim.keymap.set("n", "<leader>el", ":FzfLua<cr>^lsp_", { silent = true, noremap = true, desc = "fzf: lsp" })
 vim.keymap.set("n", "<leader>eb", ":Gitsigns blame<cr>", { silent = true, noremap = true, desc = "git: blame" })
-vim.keymap.set("n", "<leader>em", ":Markview<cr>", { silent = true, noremap = true, desc = "git: blame" })
 
 -- toggles
 vim.keymap.set("n", "<leader>eth", function()
