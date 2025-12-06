@@ -47,6 +47,13 @@ autocmd TermOpen * setlocal nonumber norelativenumber
 set t_Co=256
 ]])
 
+vim.opt.guicursor = table.concat({
+  "n-v-c-sm:block",   -- normal/visual: block
+  "i-ci-ve:ver25",    -- insert: vertical bar
+  "r-cr-o:hor20",     -- replace/operator: horizontal (optional)
+  "t:ver25",          -- terminal insert: vertical bar
+}, ",")
+
 vim.api.nvim_create_autocmd("TermOpen", {
 	callback = function()
 		vim.opt_local.scrolloff = 0

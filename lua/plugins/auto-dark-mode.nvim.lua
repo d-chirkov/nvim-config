@@ -8,6 +8,7 @@ return {
             vim.cmd([[
                 hi TreesitterContextBottom gui=underline guisp=Grey
                 hi TreesitterContextLineNumberBottom gui=underline guisp=Grey
+                hi CursorLine guibg=#292929
             ]])
 		end,
 		set_light_mode = function()

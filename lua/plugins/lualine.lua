@@ -5,8 +5,9 @@ return {
 	opts = {
 		options = {
 			icons_enabled = true,
+			theme = "vscode",
+			--theme = "16color",
             --theme = "16base",
-			theme = "16color",
 			--theme = 'moonfly',
 			--theme = 'powerline',
 			component_separators = { left = "", right = "" },

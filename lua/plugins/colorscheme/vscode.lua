@@ -9,9 +9,9 @@ return {
 		--disable_nvimtree_bg = true,
 		color_overrides = {
 			vscLineNumber = "#b8b8b8",
+            vscCursorDarkDark = '#444444',
 		},
 		group_overrides = {
-			--CursorLine = { bg='#dcdcdc' },
 			--MatchParen = { bg='#c0c0c0'},
 		},
 	},
