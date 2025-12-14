@@ -11,7 +11,7 @@ return {
 				"settings.gradle",
 			},
 			-- Optional: Specify a custom Java path to run the server
-			jre_path = "/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home",
+			jre_path = "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home",
 			-- Optional: Specify additional JVM arguments
 			jvm_args = {
 				"-Xmx8g",

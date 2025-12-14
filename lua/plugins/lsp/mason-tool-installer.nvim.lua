@@ -5,13 +5,7 @@ return {
 	dependencies = { "williamboman/mason.nvim" },
 	opts = {
 		ensure_installed = {
-            -- lsp
-			"gopls",
-			"kotlin-lsp",
-			"jdtls",
-			"json-lsp",
-			"marksman",
-            "docker-language-server",
+            -- lsp is managed in mason-lspconfig.nvim.lua
 			-- formatters
 			"black",
 			"stylua",
