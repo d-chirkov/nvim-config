@@ -2,7 +2,7 @@
 return {
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	event = "VeryLazy",
-	dependencies = { "williamboman/mason.nvim" },
+	dependencies = { "mason-org/mason.nvim" },
 	opts = {
 		ensure_installed = {
             -- lsp is managed in mason-lspconfig.nvim.lua
