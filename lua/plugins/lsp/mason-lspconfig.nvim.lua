@@ -7,6 +7,7 @@ return {
 	},
 	config = function()
 		vim.lsp.config("gopls", {
+			cmd = { "gopls" },
 			settings = { gopls = { staticcheck = true } },
 			root_markers = { "go.work", "go.mod", ".git" },
 		})
@@ -42,7 +43,7 @@ return {
 					},
 					workspace = {
 						-- Make the server aware of Neovim runtime files
-                        library = { vim.env.VIMRUNTIME },
+						library = { vim.env.VIMRUNTIME },
 						checkThirdParty = false, -- Disable checking of third-party libraries by default for performance
 					},
 					telemetry = {
@@ -55,10 +56,10 @@ return {
 		-- kotlin added via plugin
 		-- java (jdtls) is configured via plugin
 		-- scala (metals) is configured via plugin
-        -- rust - install locally: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+		-- rust - install locally: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"gopls",
+				--"gopls", # Mason has invalid gopls package, installed locally via brew
 				"kotlin_lsp",
 				"jdtls",
 				"jsonls",
@@ -67,10 +68,13 @@ return {
 				"lua_ls",
 			},
 			automatic_enable = {
+				-- list disabled language servers
 				exclude = {
-					-- list disabled language servers
+					"gopls",
 				},
 			},
 		})
+
+		vim.lsp.enable("gopls")
 	end,
 }
