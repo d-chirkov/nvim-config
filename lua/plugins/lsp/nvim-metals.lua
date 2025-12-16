@@ -7,6 +7,7 @@ return {
 			-- your on_attach function
 		end
 		metals_config.root_patterns = { ".git" }
+        metals_config.init_options.statusBarProvider = "off"
 
 		return metals_config
 	end,
