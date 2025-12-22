@@ -60,8 +60,8 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				--"gopls", # Mason has invalid gopls package, installed locally via brew
-				"kotlin_lsp",
-				"jdtls",
+				--"jdtls",
+				--"kotlin_lsp",
 				"jsonls",
 				"marksman",
 				"rust_analyzer",

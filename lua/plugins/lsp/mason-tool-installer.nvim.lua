@@ -5,7 +5,10 @@ return {
 	dependencies = { "mason-org/mason.nvim" },
 	opts = {
 		ensure_installed = {
-            -- lsp is managed in mason-lspconfig.nvim.lua
+            -- most lsp is managed in mason-lspconfig.nvim.lua
+            -- lsp
+            "jdtls",
+            "kotlin_lsp",
 			-- formatters
 			"black",
 			"stylua",
