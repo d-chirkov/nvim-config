@@ -71,6 +71,7 @@ return {
 				-- list disabled language servers
 				exclude = {
 					"gopls",
+                    "kotlin_lsp",
 				},
 			},
 		})
