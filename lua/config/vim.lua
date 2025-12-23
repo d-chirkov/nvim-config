@@ -83,3 +83,4 @@ vim.o.ttimeout = true
 vim.o.ttimeoutlen = 50
 vim.opt.updatetime = 50
 vim.o.autowriteall = true
+
