@@ -12,7 +12,7 @@ return {
 			},
 			-- Optional: Specify a custom Java path to run the server
 			jre_path = nil,
-            jdk_for_symbol_resolution = os.getenv("JAVA_HOME"),
+            jdk_for_symbol_resolution = os.getenv("JAVA_HOME_21"),
 			-- Optional: Specify additional JVM arguments
 			jvm_args = {
 				"-Xmx16g",

@@ -14,8 +14,7 @@ return {
 
 		vim.lsp.config("jdtls", {
 			cmd_env = {
-				--set in ~/.zshrc , skipped here
-				--JAVA_HOME = "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home",
+				JAVA_HOME = os.getenv("JAVA_HOME_21"),
 			},
 			settings = {
 				java = {},
