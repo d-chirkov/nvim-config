@@ -65,6 +65,7 @@ return {
 				"marksman",
 				"rust_analyzer",
 				"lua_ls",
+                "buf_ls",
 			},
 			automatic_enable = {
 				-- list disabled language servers
