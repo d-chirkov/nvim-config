@@ -6,6 +6,13 @@ return {
 		"neovim/nvim-lspconfig",
 	},
 	config = function()
+        require("mason").setup({
+            registries = {
+                "github:mason-org/mason-registry",
+                "github:Crashdummyy/mason-registry",
+            },
+        })
+
 		vim.lsp.config("gopls", {
 			cmd = { "gopls" },
 			settings = { gopls = { staticcheck = true } },
@@ -52,20 +59,23 @@ return {
 			},
 		})
 
-		-- kotlin added via plugin
+		-- kotlin (kotlin.nvim) is configured via plugin
 		-- java (jdtls) is configured via plugin
 		-- scala (metals) is configured via plugin
+        -- typescript (typescript-tools) is configured via plugin
 		-- rust - install locally: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				--"gopls", # Mason has invalid gopls package, installed locally via brew
 				--"jdtls",
 				--"kotlin_lsp",
+                --"roslyn", # should be installed manually
 				"jsonls",
 				"marksman",
 				"rust_analyzer",
 				"lua_ls",
                 "buf_ls",
+                "ty",
 			},
 			automatic_enable = {
 				-- list disabled language servers
