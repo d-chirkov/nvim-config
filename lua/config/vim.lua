@@ -38,13 +38,15 @@ set ttyfast                 " Speed up scrolling in Vim
 set noswapfile              " disable creating swap file
 " set clipboard=
 set fillchars=eob:\ ,fold:\ ,vert:\│ " remove unnecessary tildas at empty lines
-let &scrolloff = 5
+let &scrolloff = 0
 set smoothscroll
 set showtabline=0
 set relativenumber
 au TextYankPost * silent! lua vim.highlight.on_yank()
 autocmd TermOpen * setlocal nonumber norelativenumber
 set t_Co=256
+" au TermEnter * setlocal scrolloff=0
+" au TermLeave * setlocal scrolloff=0
 ]])
 
 vim.opt.guicursor = table.concat({
@@ -53,12 +55,6 @@ vim.opt.guicursor = table.concat({
   "r-cr-o:hor20",     -- replace/operator: horizontal (optional)
   "t:ver25",          -- terminal insert: vertical bar
 }, ",")
-
-vim.api.nvim_create_autocmd("TermOpen", {
-	callback = function()
-		vim.opt_local.scrolloff = 0
-	end,
-})
 
 vim.diagnostic.config({ jump = { float = true } })
 
