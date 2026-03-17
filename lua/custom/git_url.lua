@@ -1,6 +1,7 @@
 local M = {}
 
-function M.open_in_git_web(start_line, end_line)
+function M.open_in_git_web(start_line, end_line, opts)
+	opts = opts or {}
 	local file = vim.fn.expand("%:p")
 	local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
 	if not git_root or git_root == "" then
@@ -9,7 +10,16 @@ function M.open_in_git_web(start_line, end_line)
 	local rel_path = file:sub(#git_root + 2)
 
 	local remote = (vim.fn.systemlist("git remote get-url origin")[1] or ""):gsub("%s+$", "")
-	local branch = (vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1] or ""):gsub("%s+$", "")
+	local branch
+	if opts.default_branch then
+		branch = (vim.fn.systemlist("git rev-parse --abbrev-ref refs/remotes/origin/HEAD")[1] or ""):gsub("%s+$", ""):gsub("^origin/", "")
+		if branch == "" then
+			vim.notify("Could not detect default branch. Run: git remote set-head origin --auto", vim.log.levels.WARN)
+			return
+		end
+	else
+		branch = (vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1] or ""):gsub("%s+$", "")
+	end
 
 	local function url_encode_path(p)
 		return (p:gsub("([^%w%-%._~/])", function(c)

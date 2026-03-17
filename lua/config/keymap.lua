@@ -265,6 +265,20 @@ vim.keymap.set("v", "<leader>eu", function()
 		vim.cmd("normal! gv")
 	end)
 end, { desc = "git: open url" })
+vim.keymap.set("n", "<leader>eU", function()
+	require("custom.git_url").open_in_git_web(vim.fn.line("."), nil, { default_branch = true })
+end, { desc = "git: open url (default branch)" })
+vim.keymap.set("v", "<leader>eU", function()
+	local s = vim.fn.getpos("'<")[2]
+	local e = vim.fn.getpos("'>")[2]
+	if s > e then
+		s, e = e, s
+	end
+	require("custom.git_url").open_in_git_web(s, e, { default_branch = true })
+	vim.schedule(function()
+		vim.cmd("normal! gv")
+	end)
+end, { desc = "git: open url (default branch)" })
 vim.keymap.set("n", "<leader>ei", ":Import", { silent = true, noremap = true, desc = "import" })
 vim.keymap.set(
 	"n",
