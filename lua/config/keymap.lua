@@ -47,9 +47,9 @@ vim.keymap.set({ "n", "v" }, "[s", "[gczz", { silent = true, remap = true, desc 
 -- vim.keymap.set({ "n", "v" }, "[f", "[gfzt", { silent = true, remap = true, desc = "goto: prev function" })
 -- vim.keymap.set({ "n", "v" }, "]s", "]gczt", { silent = true, remap = true, desc = "goto: next class" })
 -- vim.keymap.set({ "n", "v" }, "[s", "[gczt", { silent = true, remap = true, desc = "goto: prev class" })
-vim.keymap.set({ "n", "v" }, "[c", function()
-	require("treesitter-context").go_to_context(vim.v.count1)
-end, { silent = true, remap = true, desc = "goto: prev context" })
+-- vim.keymap.set({ "n", "v" }, "[c", function()
+-- 	require("treesitter-context").go_to_context(vim.v.count1)
+-- end, { silent = true, remap = true, desc = "goto: prev context" })
 vim.keymap.set({ "n", "v" }, "]e", function()
 	vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
 end, { desc = "diagnostics: next error" })
@@ -303,6 +303,24 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>ew", ":FzfLua buffers<cr>", { silent = true, noremap = true, desc = "fzf: keymaps" })
 vim.keymap.set("n", "<leader>el", ":FzfLua<cr>^lsp_", { silent = true, noremap = true, desc = "fzf: lsp" })
 vim.keymap.set("n", "<leader>eb", ":Gitsigns blame<cr>", { silent = true, noremap = true, desc = "git: blame" })
+vim.keymap.set("n", "<leader>ec", function()
+	local obj = vim.system({ "git", "symbolic-ref", "refs/remotes/origin/HEAD" }, { text = true }):wait()
+	local base = obj.code == 0 and vim.trim(obj.stdout):gsub("refs/remotes/", "") or "master"
+	require("fzf-lua").fzf_exec("git diff --name-only " .. base .. "...HEAD", {
+		prompt = "Branch changes> ",
+		previewer = "builtin",
+		preview = "git diff " .. base .. "...HEAD -- {1}",
+		actions = require("fzf-lua").defaults.actions.files,
+	})
+end, { silent = true, noremap = true, desc = "fzf: files changed in branch" })
+
+-- git hunk navigation
+vim.keymap.set("n", "]c", function()
+	require("gitsigns").nav_hunk("next")
+end, { desc = "git: next hunk" })
+vim.keymap.set("n", "[c", function()
+	require("gitsigns").nav_hunk("prev")
+end, { desc = "git: prev hunk" })
 
 -- toggles
 vim.keymap.set("n", "<leader>eth", function()

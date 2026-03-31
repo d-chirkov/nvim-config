@@ -43,7 +43,7 @@ set smoothscroll
 set showtabline=0
 set relativenumber
 au TextYankPost * silent! lua vim.highlight.on_yank()
-autocmd TermOpen * setlocal nonumber norelativenumber
+autocmd TermOpen * setlocal nonumber norelativenumber signcolumn=no nocursorline
 set t_Co=256
 " au TermEnter * setlocal scrolloff=0
 " au TermLeave * setlocal scrolloff=0

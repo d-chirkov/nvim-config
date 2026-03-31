@@ -8,6 +8,11 @@ return {
 		end
 		metals_config.root_patterns = { ".git" }
         metals_config.init_options.statusBarProvider = "off"
+		metals_config.capabilities = vim.tbl_deep_extend(
+			"force",
+			metals_config.capabilities or {},
+			{ workspace = { didChangeWatchedFiles = { dynamicRegistration = false } } }
+		)
 
 		return metals_config
 	end,

@@ -53,6 +53,9 @@ return {
 				fzf_opts = {
 					["--history"] = file_history,
 				},
+				actions = {
+					["ctrl-g"] = { fzf.actions.toggle_ignore },
+				},
 			},
 			keymap = {
 				true,
