@@ -18,6 +18,8 @@ return {
 			"prettier",
             "goimports",
             "isort",
+            -- other
+            "tree-sitter-cli",
 		},
 		run_on_start = true,
 	},

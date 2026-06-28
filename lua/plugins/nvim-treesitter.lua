@@ -5,6 +5,7 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter").setup()
+        require("nvim-treesitter.install").prefer_git = true
 		require("nvim-treesitter").install({
 			"bash", "c", "cmake", "cpp", "dockerfile", "go", "html", "java",
 			"javascript", "kotlin", "latex", "lua", "make", "markdown",
