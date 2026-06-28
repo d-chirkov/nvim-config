@@ -8,7 +8,9 @@ return {
             -- most lsp is managed in mason-lspconfig.nvim.lua
             -- lsp
             "jdtls",
-            "kotlin_lsp",
+            -- "kotlin_lsp",
+            { "kotlin-lsp", version = "262.7569.0" },
+            "typescript-language-server",
 			-- formatters
 			"black",
 			"stylua",

@@ -18,6 +18,9 @@ local function close_floating()
 end
 vim.keymap.set("n", "<esc>", close_floating, { desc = "close float window" })
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true, noremap = true, desc = "term: esc" })
+vim.keymap.set("t", "<C-\\>", function()
+	vim.api.nvim_chan_send(vim.b.terminal_job_id, "\27")
+end, { noremap = true, desc = "term: send esc to process" })
 
 --tabs
 --vim.keymap.set("n", "<c-;>", "<ESC>:tabnew<cr>", { silent = true, noremap = true, desc = "tab: new" })
