@@ -6,10 +6,9 @@ return {
 	opts = {
 		ensure_installed = {
             -- most lsp is managed in mason-lspconfig.nvim.lua
-            -- lsp
+            -- lsp (installed but not enabled automatically to avoid conflicts with specific plugins)
             "jdtls",
-            -- "kotlin_lsp",
-            { "kotlin-lsp", version = "262.7569.0" },
+            "kotlin_lsp",
             "typescript-language-server",
 			-- formatters
 			"black",

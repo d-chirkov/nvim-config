@@ -14,9 +14,8 @@ return {
         })
 
 		vim.lsp.config("gopls", {
-			cmd = { "gopls" },
-			settings = { gopls = { staticcheck = true } },
-			root_markers = { "go.work", "go.mod", ".git" },
+			--settings = { gopls = { staticcheck = true } },
+			--root_markers = { "go.work", "go.mod", ".git" },
 		})
 
 		vim.lsp.config("jdtls", {
@@ -66,9 +65,7 @@ return {
 		-- rust - install locally: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				--"gopls", # Mason has invalid gopls package, installed locally via brew
-				--"jdtls",
-				--"kotlin_lsp",
+				"gopls",
                 --"roslyn", # should be installed manually
 				"jsonls",
 				"marksman",
