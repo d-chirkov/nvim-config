@@ -207,6 +207,17 @@ vim.keymap.set(
 	":FzfLua grep_curbuf<cr>",
 	{ noremap = true, silent = true, desc = "fzf: grep current document" }
 )
+vim.keymap.set("v", "<leader>n", function()
+	vim.cmd('noau normal! "vy')
+	local text = vim.fn.getreg("v")
+	if text ~= "" then
+		require("fzf-lua").grep_curbuf({ query = text })
+	end
+end, { desc = "fzf: lsp workspace symbols" })
+vim.keymap.set("n", "<leader>N", function()
+	local word = vim.fn.expand("<cword>")
+	require("fzf-lua").grep_curbuf({ query = word })
+end, { desc = "fzf: lsp workspace symbol under cursor" })
 vim.keymap.set(
 	"n",
 	"<leader>m",
