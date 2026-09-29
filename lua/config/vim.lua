@@ -80,3 +80,51 @@ vim.o.ttimeoutlen = 50
 vim.opt.updatetime = 50
 vim.o.autowriteall = true
 
+local hidden_buffer_group = vim.api.nvim_create_augroup("delete_hidden_buffers", { clear = true })
+
+local function is_in_jumplist(bufnr)
+	for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
+		local tabnr = vim.api.nvim_tabpage_get_number(tabpage)
+
+		for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(tabpage)) do
+			local winnr = vim.fn.win_id2tabwin(winid)[2]
+			local jumplist = vim.fn.getjumplist(winnr, tabnr)[1]
+
+			for _, jump in ipairs(jumplist) do
+				if jump.bufnr == bufnr then
+					return true
+				end
+			end
+		end
+	end
+
+	return false
+end
+
+vim.api.nvim_create_autocmd("BufHidden", {
+	group = hidden_buffer_group,
+	desc = "Delete unmodified hidden file buffers that are not jump targets",
+	callback = function(args)
+		local bufnr = args.buf
+
+		vim.schedule(function()
+			if not vim.api.nvim_buf_is_valid(bufnr) or not vim.api.nvim_buf_is_loaded(bufnr) then
+				return
+			end
+
+			if #vim.fn.win_findbuf(bufnr) > 0 then
+				return
+			end
+
+			local buffer_options = vim.bo[bufnr]
+			if
+				buffer_options.buftype == ""
+				and buffer_options.buflisted
+				and not buffer_options.modified
+				and not is_in_jumplist(bufnr)
+			then
+				vim.api.nvim_buf_delete(bufnr, {})
+			end
+		end)
+	end,
+})

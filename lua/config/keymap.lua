@@ -79,11 +79,20 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>+", "gg=G<c-o>", { silent = true, noremap = true, desc = "format simple" })
 vim.keymap.set("n", "<leader>q", "@q", { silent = true, noremap = true, desc = "run macro" })
 vim.keymap.set("n", "<leader>Q", ":qa<cr>", { silent = true, noremap = true, desc = "quit" })
-vim.keymap.set("n", "<leader>w", ":Markview<cr>", { silent = true, noremap = true, desc = "git: blame" })
+vim.keymap.set("n", "<leader>w", function()
+	local filetype = vim.bo.filetype
+
+	if vim.tbl_contains({ "markdown", "md", "rmd", "quarto" }, filetype) then
+		vim.cmd("Markview attach")
+		vim.cmd("Markview toggle")
+	elseif filetype == "csv" then
+		vim.cmd("CsvViewToggle delimiter=, display_mode=border header_lnum=auto")
+	end
+end, { silent = true, noremap = true, desc = "toggle document view" })
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { silent = true, noremap = true, desc = "lsp rename" })
 vim.keymap.set(
 	"n",
-	"<leader>y",
+	"<leader>t",
 	":FzfLua lsp_typedefs<cr>",
 	{ silent = true, noremap = true, desc = "fzf: lsp type definisions" }
 )
@@ -187,7 +196,7 @@ vim.keymap.set("v", "<leader>l", function()
 	end
 end, { desc = "fzf: lsp workspace symbols" })
 
-vim.keymap.set("n", "<leader>;", ":FzfLua resume<cr>", { silent = true, noremap = true, desc = "fzf: resume" })
+vim.keymap.set("n", "<leader>;", require("custom.fzf_history").resume, { desc = "fzf: search history" })
 vim.keymap.set(
 	"n",
 	"<leader>'",
@@ -259,6 +268,14 @@ end, { silent = true, noremap = true, desc = "term: root location" })
 
 -- exteneded layer
 vim.keymap.set("n", "<leader>eq", ":FzfLua quickfix<cr>", { silent = true, noremap = true, desc = "fzf: quickfix" })
+vim.keymap.set("n", "<leader>y", function()
+	local location = ("%s:%d"):format(vim.fn.expand("%:."), vim.fn.line("."))
+	vim.fn.setreg("+", location)
+end, { desc = "copy relative file path with line" })
+vim.keymap.set("n", "<leader>Y", function()
+	local location = ("%s:%d"):format(vim.fn.expand("%:p"), vim.fn.line("."))
+	vim.fn.setreg("+", location)
+end, { desc = "copy absolute file path with line" })
 vim.keymap.set(
 	"n",
 	"<leader>er",
@@ -296,6 +313,12 @@ end, { desc = "git: open url (default branch)" })
 vim.keymap.set("n", "<leader>ei", ":Import", { silent = true, noremap = true, desc = "import" })
 vim.keymap.set(
 	"n",
+	"<leader>ev",
+	":Gitsigns diffthis<cr>",
+	{ silent = true, noremap = true, desc = "git: diff document" }
+)
+vim.keymap.set(
+	"n",
 	"<leader>ep",
 	":Gitsigns preview_hunk<cr>",
 	{ silent = true, noremap = true, desc = "git: preview hunk" }
@@ -317,16 +340,16 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>ew", ":FzfLua buffers<cr>", { silent = true, noremap = true, desc = "fzf: keymaps" })
 vim.keymap.set("n", "<leader>el", ":FzfLua<cr>^lsp_", { silent = true, noremap = true, desc = "fzf: lsp" })
 vim.keymap.set("n", "<leader>eb", ":Gitsigns blame<cr>", { silent = true, noremap = true, desc = "git: blame" })
-vim.keymap.set("n", "<leader>ec", function()
-	local obj = vim.system({ "git", "symbolic-ref", "refs/remotes/origin/HEAD" }, { text = true }):wait()
-	local base = obj.code == 0 and vim.trim(obj.stdout):gsub("refs/remotes/", "") or "master"
-	require("fzf-lua").fzf_exec("git diff --name-only " .. base .. "...HEAD", {
-		prompt = "Branch changes> ",
-		previewer = "builtin",
-		preview = "git diff " .. base .. "...HEAD -- {1}",
-		actions = require("fzf-lua").defaults.actions.files,
-	})
-end, { silent = true, noremap = true, desc = "fzf: files changed in branch" })
+vim.keymap.set("n", "<leader>ec", require("custom.git").changed_files_from_default_branch, {
+	silent = true,
+	noremap = true,
+	desc = "fzf: files changed against default branch",
+})
+vim.keymap.set("n", "<leader>eo", require("custom.git").local_changed_files, {
+	silent = true,
+	noremap = true,
+	desc = "fzf: local changed files",
+})
 
 -- git hunk navigation
 vim.keymap.set("n", "]c", function()

@@ -3,14 +3,16 @@ return {
 	enabled = true,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
-    priority = 1002,
+	priority = 1002,
 	config = function()
 		local fzf = require("fzf-lua")
+		local history = require("custom.fzf_history")
 		local file_history = vim.fn.stdpath("data") .. "/fzf-lua-file-history.txt"
 		local grep_history = vim.fn.stdpath("data") .. "/fzf-lua-grep-history.txt"
 		local history_size = "1000"
 		require("fzf-lua").setup({
 			{ "hide" },
+			defaults = { enrich = history.enrich },
 			fzf_opts = {
 				["--history"] = grep_history,
 				["--history-size"] = history_size,
@@ -28,6 +30,7 @@ return {
 			},
 			winopts = {
 				true,
+				on_create = history.record,
 				fullscreen = true,
 				height = 0.90,
 				width = 0.95,
