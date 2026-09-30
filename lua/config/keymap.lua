@@ -99,8 +99,10 @@ vim.keymap.set(
 vim.keymap.set(
 	"n",
 	"<leader>u",
-	":FzfLua lsp_references<cr>",
-	{ silent = true, noremap = true, desc = "fsf: lsp references" }
+	function()
+		require("fzf-lua").lsp_references({ async = true })
+	end,
+	{ silent = true, noremap = true, desc = "fzf: lsp references" }
 )
 vim.keymap.set(
 	"n",
