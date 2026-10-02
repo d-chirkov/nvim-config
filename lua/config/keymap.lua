@@ -18,7 +18,8 @@ local function close_floating()
 end
 vim.keymap.set("n", "<esc>", close_floating, { desc = "close float window" })
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true, noremap = true, desc = "term: esc" })
-vim.keymap.set("t", "<C-\\>", function()
+-- Keep <C-g> available to terminal applications and <C-\><C-n> available to Neovim.
+vim.keymap.set("t", "<C-]>", function()
 	vim.api.nvim_chan_send(vim.b.terminal_job_id, "\27")
 end, { noremap = true, desc = "term: send esc to process" })
 
@@ -79,6 +80,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>+", "gg=G<c-o>", { silent = true, noremap = true, desc = "format simple" })
 vim.keymap.set("n", "<leader>q", "@q", { silent = true, noremap = true, desc = "run macro" })
 vim.keymap.set("n", "<leader>Q", ":qa<cr>", { silent = true, noremap = true, desc = "quit" })
+vim.keymap.set("n", "<leader>z", require("custom.buffers").close_hidden, { desc = "close hidden buffers" })
 vim.keymap.set("n", "<leader>w", function()
 	local filetype = vim.bo.filetype
 
@@ -332,7 +334,7 @@ vim.keymap.set(
 	{ silent = true, noremap = true, desc = "fzf: diagnostics document" }
 )
 vim.keymap.set("n", "<leader>ef", ":FzfLua<cr>", { silent = true, noremap = true, desc = "fzf" })
-vim.keymap.set("n", "<leader>eg", ":FzfLua<cr>^git_", { silent = true, noremap = true, desc = "fzf: git" })
+vim.keymap.set("n", "<leader>eg", ":FzfLua git_diff<cr>", { silent = true, noremap = true, desc = "fzf: git diff" })
 vim.keymap.set(
 	"n",
 	"<leader>eh",
