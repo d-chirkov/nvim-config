@@ -47,7 +47,7 @@ return {
 			lualine_b = {},
 			lualine_c = { { "filename", path = 1 } },
 			lualine_x = {},
-			lualine_y = { "location", "progress", "selectioncount" },
+			lualine_y = { "branch", "location", "progress", "selectioncount" },
 			lualine_z = { "mode" },
 		},
 		extensions = {},
