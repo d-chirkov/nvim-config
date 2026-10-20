@@ -80,7 +80,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>+", "gg=G<c-o>", { silent = true, noremap = true, desc = "format simple" })
 vim.keymap.set("n", "<leader>q", "@q", { silent = true, noremap = true, desc = "run macro" })
 vim.keymap.set("n", "<leader>Q", ":qa<cr>", { silent = true, noremap = true, desc = "quit" })
-vim.keymap.set("n", "<leader>z", require("custom.buffers").close_hidden, { desc = "close hidden buffers" })
+vim.keymap.set("n", "<leader>z", require("custom.buffers").close_hidden, { desc = "force close hidden buffers" })
 vim.keymap.set("n", "<leader>w", function()
 	local filetype = vim.bo.filetype
 

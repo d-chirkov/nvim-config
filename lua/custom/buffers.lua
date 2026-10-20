@@ -11,13 +11,9 @@ function M.close_hidden()
 	local skipped = 0
 	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].buflisted and not visible[bufnr] then
-			if vim.bo[bufnr].modified then
+			local ok = pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
+			if not ok then
 				skipped = skipped + 1
-			else
-				local ok = pcall(vim.api.nvim_buf_delete, bufnr, {})
-				if not ok then
-					skipped = skipped + 1
-				end
 			end
 		end
 	end
