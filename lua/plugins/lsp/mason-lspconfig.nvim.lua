@@ -1,18 +1,12 @@
 return {
 	"mason-org/mason-lspconfig.nvim",
+	event = { "BufReadPre", "BufNewFile" },
 	opts = {},
 	dependencies = {
-		{ "mason-org/mason.nvim", opts = {} },
+		"mason-org/mason.nvim",
 		"neovim/nvim-lspconfig",
 	},
 	config = function()
-        require("mason").setup({
-            registries = {
-                "github:mason-org/mason-registry",
-                "github:Crashdummyy/mason-registry",
-            },
-        })
-
 		vim.lsp.config("gopls", {
 			--settings = { gopls = { staticcheck = true } },
 			--root_markers = { "go.work", "go.mod", ".git" },

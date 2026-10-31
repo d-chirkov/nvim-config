@@ -25,6 +25,10 @@ vim.api.nvim_create_autocmd("TermEnter", {
 return {
     "kdheepak/lazygit.nvim",
     event = "VeryLazy",
+	init = function()
+		vim.g.lazygit_floating_window_scaling_factor = 1
+		vim.g.lazygit_floating_window_border_chars = "none"
+	end,
 	cond = function()
 		return vim.fs.find(".git", { upward = true })[1] ~= nil
 	end,

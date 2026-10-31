@@ -204,7 +204,9 @@ vim.keymap.set("n", "<leader>;", require("custom.fzf_history").resume, { desc = 
 vim.keymap.set(
 	"n",
 	"<leader>'",
-	require("aerial").fzf_lua_picker,
+	function()
+		require("aerial").fzf_lua_picker()
+	end,
 	{ silent = true, noremap = true, desc = "fzf: structure" }
 )
 vim.keymap.set(

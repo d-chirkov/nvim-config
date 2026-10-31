@@ -1,8 +1,11 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-    --event = "VeryLazy",
-    priority = 1003,
+	cmd = {
+		"NvimTreeOpen", "NvimTreeClose", "NvimTreeToggle", "NvimTreeFocus",
+		"NvimTreeRefresh", "NvimTreeClipboard", "NvimTreeFindFile", "NvimTreeFindFileToggle",
+		"NvimTreeResize", "NvimTreeCollapse", "NvimTreeCollapseKeepBuffers", "NvimTreeHiTest",
+	},
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -45,9 +48,6 @@ return {
 			vim.keymap.set("n", "bmv", api.marks.bulk.move, opts("Move Bookmarked"))
 			vim.keymap.set("n", "B", api.tree.toggle_no_buffer_filter, opts("Toggle No Buffer"))
 			vim.keymap.set("n", "c", api.fs.copy.node, opts("Copy"))
-			vim.keymap.set("n", "C", api.tree.toggle_git_clean_filter, opts("Toggle Git Clean"))
-			vim.keymap.set("n", "[c", api.node.navigate.git.prev, opts("Prev Git"))
-			vim.keymap.set("n", "]c", api.node.navigate.git.next, opts("Next Git"))
 			vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
 			vim.keymap.set("n", "D", api.fs.trash, opts("Trash"))
 			vim.keymap.set("n", "E", api.tree.expand_all, opts("Expand All"))
@@ -59,7 +59,6 @@ return {
 			vim.keymap.set("n", "g?", api.tree.toggle_help, opts("Help"))
 			vim.keymap.set("n", "gy", api.fs.copy.absolute_path, opts("Copy Absolute Path"))
 			vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, opts("Toggle Dotfiles"))
-			vim.keymap.set("n", "I", api.tree.toggle_gitignore_filter, opts("Toggle Git Ignore"))
 			vim.keymap.set("n", "J", api.node.navigate.sibling.last, opts("Last Sibling"))
 			vim.keymap.set("n", "K", api.node.navigate.sibling.first, opts("First Sibling"))
 			vim.keymap.set("n", "m", api.marks.toggle, opts("Toggle Bookmark"))
@@ -91,6 +90,10 @@ return {
 			sort_by = "case_sensitive",
 			sync_root_with_cwd = true,
 			respect_buf_cwd = true,
+			-- Git status blocks the first open in large repositories.
+		git = {
+			enable = false,
+		},
 			on_attach = on_attach,
 			view = {
 				centralize_selection = true,

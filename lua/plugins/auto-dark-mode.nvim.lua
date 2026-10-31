@@ -18,7 +18,7 @@ return {
                 hi TreesitterContextLineNumberBottom gui=underline guisp=Grey
             ]])
 		end,
-		update_interval = 3000,
+		update_interval = 15000,
 		fallback = "dark",
 	},
 }

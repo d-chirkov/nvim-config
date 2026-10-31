@@ -10,7 +10,7 @@ return {
 		local file_history = vim.fn.stdpath("data") .. "/fzf-lua-file-history.txt"
 		local grep_history = vim.fn.stdpath("data") .. "/fzf-lua-grep-history.txt"
 		local history_size = "1000"
-		require("fzf-lua").setup({
+		fzf.setup({
 			{ "hide" },
 			defaults = { enrich = history.enrich },
 			fzf_opts = {
@@ -83,5 +83,6 @@ return {
 				},
 			},
 		})
+		fzf.register_ui_select()
 	end,
 }
