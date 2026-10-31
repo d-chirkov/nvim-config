@@ -13,11 +13,14 @@ return {
 		})
 
 		vim.lsp.config("jdtls", {
-			cmd_env = {
-				JAVA_HOME = os.getenv("JAVA_HOME_21"),
-			},
+			cmd_env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home" },
+			init_options = { extendedClientCapabilities = require("jdtls").extendedClientCapabilities },
 			settings = {
-				java = {},
+				java = {
+					configuration = {
+						updateBuildConfiguration = "automatic",
+					},
+				},
 			},
 			root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
 		})
@@ -55,24 +58,24 @@ return {
 		-- kotlin (kotlin.nvim) is configured via plugin
 		-- java (jdtls) is configured via plugin
 		-- scala (metals) is configured via plugin
-        -- typescript (typescript-tools) is configured via plugin
+		-- typescript (typescript-tools) is configured via plugin
 		-- rust - install locally: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"gopls",
-                --"roslyn", # should be installed manually
+				--"roslyn", # should be installed manually
 				"jsonls",
 				"marksman",
 				"rust_analyzer",
 				"lua_ls",
-                "buf_ls",
-                "ty",
+				"buf_ls",
+				"ty",
 			},
 			automatic_enable = {
 				-- list disabled language servers
 				exclude = {
 					"gopls",
-                    "kotlin_lsp",
+					"kotlin_lsp",
 				},
 			},
 		})
