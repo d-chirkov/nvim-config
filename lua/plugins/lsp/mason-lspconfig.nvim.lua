@@ -13,7 +13,11 @@ return {
 		})
 
 		vim.lsp.config("jdtls", {
-			cmd_env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home" },
+			-- JDTLS needs Java 25+, independently of the project's JAVA_HOME.
+			cmd_env = {
+				JAVA_HOME = vim.env.JDTLS_JAVA_HOME
+					or (vim.trim(vim.fn.system({ "brew", "--prefix", "openjdk" })) .. "/libexec/openjdk.jdk/Contents/Home"),
+			},
 			init_options = { extendedClientCapabilities = require("jdtls").extendedClientCapabilities },
 			settings = {
 				java = {
